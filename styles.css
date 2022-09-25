@@ -176,14 +176,14 @@ br {
     height: 17rem;
     width: 17rem;
 }
+.b-red:active {
+    background-color: #f94d27;
+}
 
 .b-red:hover{
     background-color: #80343483;
 }
 
-.b-red:active {
-    background-color: #f94d27;
-}
 .b-red-active {
     grid-area: b-red;
     background-color: #f94d27;   
@@ -200,13 +200,14 @@ br {
     width: 17rem;
 }
 
+.b-blue:active {
+    background-color: #099df9;   
+}
+
 .b-blue:hover {
     background-color: #044c7979;
 }
 
-.b-blue:active {
-    background-color: #099df9;   
-}
 .b-blue-active {
     grid-area: b-blue;
     background-color: #099df9;   
@@ -217,22 +218,23 @@ br {
 
 .b-yellow {
     grid-area: b-yellow;
-    background-color: #8a7f09;
+    background-color: #554f12;
     border-bottom-left-radius: 20%;
     height: 17rem;
     width: 17rem;
+}
+
+.b-yellow:active {
+    background-color: #eeff00;
 }
 
 .b-yellow:hover {
     background-color: #fcf5a7;
 }
 
-.b-yellow:active {
-    background-color: #ffea06;
-}
 .b-yellow-active {
     grid-area: b-yellow;
-    background-color: #ffea06;
+    background-color: #eeff00;
     border-bottom-left-radius: 20%;
     height: 17rem;
     width: 17rem;
