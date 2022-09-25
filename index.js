@@ -76,8 +76,7 @@ function randomButtonColor(){
     return buttonColor;
 }
 
-function computerPressRndColor(){
-    const rndBtnColor = randomButtonColor();
+function computerPressRndColor(rndBtnColor){
     const { htmlElemt } = rndBtnColor; 
     const lastClassName = htmlElemt.className;
     htmlElemt.className =  `${htmlElemt.className}-active`;
@@ -110,19 +109,20 @@ let count = 0;
 
 function main () {
     //Async Programming like a for infinity loop without blocking my page.
-    setInterval( function () {
+    setInterval( async function () {
         // computerPressRndColor(randomButtonColor());
         // console.log(randomButtonColor());
         console.log(game.state)
         console.log(game.computerPressed)
         switch (game.state) {
             case state.userPlaying:
+
                 break;
             case state.computerPlaying:
                 if (game.computerPressed.length < game.level){
                     const rdnBtmColor =  randomButtonColor()
-                    computerPressRndColor(rdnBtmColor);
-                    game.computerPressed.push(rdnBtmColor.value);
+                    await computerPressRndColor(rdnBtmColor);
+                    game.computerPressed.push(rdnBtmColor);
                     console.log(game);
                 } else {
                     game.state = state.userPlaying;
