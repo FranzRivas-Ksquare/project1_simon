@@ -28,27 +28,27 @@ const buttonsProperties = {
         colorPressed: "#02ffd1",
         color: "#038C73",
         htmlElemt: document.querySelector(".b-green"),
-        value: 1,
+        value: 0,
         init: function () {
-            this.htmlElemt.addEventListener("click", function () { callBackSound(audioGreen) });
+            this.htmlElemt.addEventListener("click", function () { callBackSound(audioGreen); console.log("green");});
         }
     },
     red:  {
         colorPressed: "#f94d27",
         color: "#9a250a",
         htmlElemt: document.querySelector(".b-red"),
-        value: 2,
+        value: 1,
         init: function () {
-            this.htmlElemt.addEventListener("click", function () { callBackSound(audioRed) });
+            this.htmlElemt.addEventListener("click", function () { callBackSound(audioRed); console.log("red"); });
         }
     },
     yellow: {
         colorPressed: "#ffea06",
         color: "#8a7f09",
         htmlElemt: document.querySelector(".b-yellow"),
-        value: 3,
+        value: 2,
         init: function () {
-            this.htmlElemt.addEventListener("click", function () { callBackSound(audioYellow) });
+            this.htmlElemt.addEventListener("click", () => { callBackSound(audioYellow); htmlElemt.style.background = this.colorPressed});
         }
     },
 
@@ -56,9 +56,9 @@ const buttonsProperties = {
         colorPressed:"#099df9",
         color: "#055b91",
         htmlElemt: document.querySelector(".b-blue"),
-        value: 4,
+        value: 3,
         init: function () {
-            this.htmlElemt.addEventListener("click", function () { callBackSound(audioBlue) });
+            this.htmlElemt.addEventListener("click", function () { callBackSound(audioBlue); console.log("blue") });
         }
     },
 };
@@ -67,6 +67,7 @@ const game =  {
     level: 1,
     state: state.start,
     isStarted: false,
+    computerPressed: [],
 }
 
 function randomButtonColor(){
@@ -78,10 +79,11 @@ function randomButtonColor(){
 function computerPressRndColor(){
     const rndBtnColor = randomButtonColor();
     const { htmlElemt } = rndBtnColor; 
-    htmlElemt.style.background =  rndBtnColor.colorPressed;
+    const lastClassName = htmlElemt.className;
+    htmlElemt.className =  `${htmlElemt.className}-active`;
     setTimeout(()=>{
-        htmlElemt.style.background = rndBtnColor.color;
-    }, 250);
+        htmlElemt.className = lastClassName;
+    }, 500);
     console.log(htmlElemt);
 }
 
@@ -97,24 +99,38 @@ buttonsProperties.yellow.init();
 buttonsProperties.blue.init();
 
 const buttonStart = document.querySelector(".circle");
-buttonStart.addEventListener("click", function(){ callBackSound(audioStart)});
+buttonStart.addEventListener("click", function()
+{ 
+    callBackSound(audioStart);
+    game.state =  state.computerPlaying;
+    game.level = 1;
+});
 
 let count = 0;
 
 function main () {
-    setTimeout( function () {
-        console.log("Async Programming");
-
-    }, 5000);
-
     //Async Programming like a for infinity loop without blocking my page.
     setInterval( function () {
-        computerPressRndColor(randomButtonColor());
+        // computerPressRndColor(randomButtonColor());
         // console.log(randomButtonColor());
+        console.log(game.state)
+        console.log(game.computerPressed)
         switch (game.state) {
             case state.userPlaying:
                 break;
             case state.computerPlaying:
+                if (game.computerPressed.length < game.level){
+                    const rdnBtmColor =  randomButtonColor()
+                    computerPressRndColor(rdnBtmColor);
+                    game.computerPressed.push(rdnBtmColor.value);
+                    console.log(game);
+                } else {
+                    game.state = state.userPlaying;
+                    buttonsProperties.green.init();
+                    buttonsProperties.red.init();
+                    buttonsProperties.yellow.init();
+                    buttonsProperties.blue.init();
+                }
 
                 break;
         }

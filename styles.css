@@ -75,6 +75,13 @@ br {
 .b-green:active{
     background: #02ffd1;
 }
+.b-green-active {
+    grid-area: b-green;
+    background: #02ffd1;   
+    border-top-left-radius: 20%;
+    height: 17rem;
+    width: 17rem;
+}
 
 .b-red {
     grid-area: b-red;
@@ -85,6 +92,13 @@ br {
 }
 .b-red:active {
     background-color: #f94d27;
+}
+.b-red-active {
+    grid-area: b-red;
+    background-color: #f94d27;   
+    border-top-right-radius: 20%;
+    height: 17rem;
+    width: 17rem;
 }
 
 .b-blue {
@@ -97,6 +111,13 @@ br {
 .b-blue:active {
     background-color: #099df9;   
 }
+.b-blue-active {
+    grid-area: b-blue;
+    background-color: #099df9;   
+    border-bottom-right-radius: 20%;
+    height: 17rem;
+    width: 17rem;
+}
 
 .b-yellow {
     grid-area: b-yellow;
@@ -108,6 +129,13 @@ br {
 
 .b-yellow:active {
     background-color: #ffea06;
+}
+.b-yellow-active {
+    grid-area: b-yellow;
+    background-color: #ffea06;
+    border-bottom-left-radius: 20%;
+    height: 17rem;
+    width: 17rem;
 }
 
 
