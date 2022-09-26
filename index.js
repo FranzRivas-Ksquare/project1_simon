@@ -1,3 +1,11 @@
+//-------------------------------------
+//HERE GOES THE INITIALIZATION FOR SOUNDS
+//-----PLEASE BE CAREFUL WHEN ADDING-----
+//---------------FEATURES----------------
+//---------------------------------------
+
+let fakevalue="js generated";
+
 //--------------Functions-------------
 
 // TODO: Take a count and display it in th count screen
@@ -15,81 +23,96 @@ function getHistory(currenthistory){
     document.querySelector(".historie").textContent = currenthistory;
 };
 
+//TODO: to turn on the button light taking an argument
+function lightOn(btncolor){
+btncolor.setAttribute('class', 'light');
+};
+
+//TODO: to put the preselected dimmed color in its button
+function dimmOver(btncolor){
+    btncolor.setAttribute('class', 'mouseover');
+    };
+
+//TODO: to remove the preselected dimmed color from its button
+function removeDimm(btncolor){
+    btncolor.removeAttribute('class', 'mouseover');
+    };
+
 //------------Events-----------
 
 //--For clicking and moving mouse
-//green
+//---green
 const firstGrn = document.querySelector('#firstGrn');
 
 firstGrn.addEventListener('click', function()
 {
-    firstGrn.setAttribute('class', 'light');
+    lightOn(firstGrn);
 });
 
 firstGrn.addEventListener('mouseenter', function()
 {
-    firstGrn.setAttribute('class', 'mouseover');
+    dimmOver(firstGrn);
 });
 
 firstGrn.addEventListener('mouseleave', function()
 {
-    firstGrn.removeAttribute('class', 'mouseover')
+    removeDimm(firstGrn);
 });
 
 
-//red
+//---red
 const secondRed = document.querySelector('#secondRed');
 
 secondRed.addEventListener('click', function()
 {
-    secondRed.setAttribute('class', 'light');
+    lightOn(secondRed);
 });
 
 secondRed.addEventListener('mouseenter', function()
 {
-    secondRed.setAttribute('class', 'mouseover');
+    dimmOver(secondRed);
 });
 
 secondRed.addEventListener('mouseleave', function()
 {
-    secondRed.removeAttribute('class', 'mouseover')
+    removeDimm(secondRed);
 });
 
 
-//blue
+//---blue
 const thirdBlu = document.querySelector('#thirdBlu');
 
 thirdBlu.addEventListener('click', function()
 {
-    thirdBlu.setAttribute('class', 'light');
+    lightOn(thirdBlu);
 });
 
 thirdBlu.addEventListener('mouseenter', function()
 {
-    thirdBlu.setAttribute('class', 'mouseover');
+    dimmOver(thirdBlu);
 });
 
 thirdBlu.addEventListener('mouseleave', function()
 {
-    thirdBlu.removeAttribute('class', 'mouseover')
+    removeDimm(thirdBlu);
 });
 
-//yellow
+//---yellow
 const fourthYlw = document.querySelector('#fourthYlw');
 
 fourthYlw.addEventListener('click', function()
 {
-    fourthYlw.setAttribute('class', 'light');
+    lightOn(fourthYlw);
 });
 
 fourthYlw.addEventListener('mouseenter', function()
 {
-    fourthYlw.setAttribute('class', 'mouseover');
+    dimmOver(fourthYlw);
 });
 
 fourthYlw.addEventListener('mouseleave', function()
 {
-    fourthYlw.removeAttribute('class', 'mouseover')
+    removeDimm(fourthYlw);
 });
 
 
