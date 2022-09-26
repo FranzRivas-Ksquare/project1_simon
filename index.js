@@ -20,7 +20,7 @@ const state = {
     lose: -1,
     start: false, //Indicates when the game is running
     userTurn: false, //When user is cliking
-    computerTurn: true, //When computer is drawin the patterns
+    cpuTurn: true, //When computer is drawin the patterns
     finish: false,
 };
 
@@ -31,12 +31,13 @@ const difficulty = {
 };
 
 const game =  {
+    lives: 1,
     level: 1,
     difficulty: difficulty,
-    state: state.start,
+    state: state,
     cpuSelect: [],
     userSelect: [],
-    score: 0,
+    count: 0,
     message: "Ready to play",
 };
 
@@ -44,12 +45,12 @@ const buttons = ["green", "red", "yellow", "blue"];
 
 const patronLogic = (element, value, name, audio) => {
     element.addEventListener("click", () => {
-        if (userTurn) game.userSelect.push(value);
-        if (!answerValidation()) {
+        if (answerValidation()) {
+            if (state.userTurn) game.userSelect.push(value);
+            callBackSound(audio);
+        } else {
             audioWrong.play();
             console.log(name);
-        } else {
-            callBackSound(audio);
         }
     });
 };
@@ -138,17 +139,12 @@ function computerPressRndColor(){
     setTimeout(()=>{
         htmlElemt.className = lastClassName;
     }, 1000);
-    console.log(htmlElemt);
 };
 
 function answerValidation () {
     console.log(`user Pressed: ${game.userSelect}`);
     return game.userSelect.some((value, index) => game.cpuSelect[index] == value);
 };
-
-function resetInputs(array) {
-    array = [];
-}
 
 function callBackSound(audioObj) {
     audioObj.load();
@@ -175,10 +171,10 @@ buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
 const menuStart = document.querySelector("#start");
 menuStart.addEventListener("click", function(){ 
     callBackSound(audioStart);
-    if (game.state) {
-        game.state = false;
+    if (state.start) {
+        state.start = false;
     } else {
-        game.state = true;
+        state.start = true;
     };
 });
 
@@ -186,10 +182,10 @@ const buttonStart = document.querySelector("#circle");
 buttonStart.addEventListener("click", function() { 
     callBackSound(audioStart);
     game.level = 1;
-    if (game.state) {
-        game.state = false;
+    if (state.start) {
+        state.start = false;
     } else {
-        game.state = true;
+        state.start = true;
     };
 });
 
@@ -211,75 +207,77 @@ hard.addEventListener("click", function(){
 
 //--End of setting events--
 
-let count = 0;
+function main (game, state) {
 
-function main () {
+    switch (state.difficulty) {
+        case easy:
+            game.lives = 999
+            break;
+        case normal:
+            game.lives = 3
+            break
+        case hard:
+            game.lives = 1
+            break
+        default:
+            game.lives = 3
+    };
 
-    //Async Programming like a for infinity loop without blocking my page.
-    setInterval( async function () {
+    setInterval( async function (game, state) {
 
-        switch (game.state) {
-            case state.userPlaying:
-                const isUserCorrectNow = answerValidation(); //Read the current inputs, in case that user do a mistake it throw false
-                console.log("isCorrect: ", isUserCorrectNow);
-                if(!isUserCorrectNow) {
-                    game.cpuSelect = [];
-                    game.userSelect = [];
-                    game.state =  state.computerPlaying;
-                    game.message = "You lose";
-                    game.sendMessage = true;
-                    game.level = 1;
-                    game.state = state.start;
-                } else if (isUserCorrectNow) {
-                    game.level++;
-                    const updatedLevel = game.level;
-                    game.cpuSelect = [];
-                    game.userSelect = [];
-                    game.message = "You won, difficulty update to " + updatedLevel;
-                    game.sendMessage = true;
-                    game.score = updatedLevel - 1;
-                    game.state =  state.computerPlaying;
+        if (state.start) {
 
-                }
+            if (state.userTurn) {
+                    if (game.lives > 0) {
+                        if (answerValidation()) {
+                            game.count = game.count + 1;
+                            if (game.count == game.level) {
+                                game.level = game.level + 1;
+                            }
+                        } else {
+                            game.live = game.live - 1;
+                        }
+                    } else {
+                        game.level = 1;
+                        game.userSelect = [];
+                        game.cpuSelect = [];
+                        state.cpuTurn = true;
+                        state.start = false;
+                    }
+            };
 
-                if (game.sendMessage == true) {
-                    console.log(game.message);
-                    game.sendMessage = false;
-                }
-
-                
-                break;
-            case state.computerPlaying:
-                if (game.cpuSelect.length < game.level){
-                    const rdnBtmColor =  randomButtonColor()
+            if (state.cpuTurn) {
+                if (game.cpuSelect.length <= game.level){
+                    let rdnBtmColor =  randomButtonColor()
                     await computerPressRndColor(rdnBtmColor);
                     game.cpuSelect.push(rdnBtmColor.value); //When computers click a button it is stored in global
-                    console.log(game);
+                    console.log(game.cpuSelect);
+                    setTimeout( function () {
+                        console.log("show color");
+                    }, 1000);
                     //TODO: Ommit user interations with user
                 } else {
-                    game.state = state.userPlaying;
+                    state.userTurn = true;
                 }
+            }
 
-                break;
-        }
+        };
         console.log("user: ", game.userSelect);
         console.log("computer: ", game.cpuSelect);
         console.log("--------------------------------");
-    }, 2000 );
+    }, 1000 );
 
     setTimeout( function () {
         console.log("Async Programming");
-    }, 5000);
+    }, 1000);
 
     //Async Programming like a for infinity loop without blocking my page.
     setInterval( function () {
-        if (game.state) {
+        if (state.start) {
             computerPressRndColor(randomButtonColor());
         }
-
-        // console.log(randomButtonColor());
     }, 1000 );
 
 };
 
-main();
+main(game, state);
