@@ -22,7 +22,7 @@ audioWrong.autoplay = false;
 const state = {
     win: -1,
     lose: -2,
-    start: false, //Indicates when the game is running
+    start: 0, //Indicates when the game is running
     userPlaying: 1, //When user is cliking
     computerPlaying: 2, //When computer is drawin the patterns
     finish: 3,
@@ -30,15 +30,24 @@ const state = {
 
 let fakecount="JS generated!"; //a fakecount to simulate a fake score
 
+const difficulty = {
+    easy: "easy",
+    normal: "normal",
+    hard: "hard",
+};
+
+//Game settings
 const game =  {
     level: 1,
     state: state.start,
     isStarted: false,
     computerPressed: [],
     userPressed: [],
+    difficulty: difficulty,
     message: "Ready to play",
     score: 0,
-}
+};
+
 const buttons = ["green", "red", "yellow", "blue"];
 
 //Setting selflight colors
@@ -111,28 +120,12 @@ const buttonsProperties = {
     },
 };
 
-const difficulty = {
-    easy: "easy",
-    normal: "normal",
-    hard: "hard",
-};
-
-//Game settings
-const game =  {
-    level: 1,
-    state: state.start,
-    isStarted: false,
-    difficulty: difficulty,
-};
-
 //Getting 1 random color to add...
 function randomButtonColor(){
     const color =  buttons[Math.floor(Math.random() * 4)];
     const buttonColor =  buttonsProperties[color];
     return buttonColor;
 }
-
-function computerPressRndColor(rndBtnColor){
 
 //Basic function to make de pc highligh a rndon color
 function computerPressRndColor(){
@@ -182,25 +175,29 @@ buttonsProperties.yellow.init();
 buttonsProperties.blue.init();
 
 const buttonStart = document.querySelector("#circle");
-buttonStart.addEventListener("click", function()
-{ 
+buttonStart.addEventListener("click", function() { 
     callBackSound(audioStart);
     game.state =  state.computerPlaying;
     game.level = 1;
+    if (game.state) {
+        game.state = false;
+    } else {
+        game.state = true;
+    };
 });
 
 //-----Setting events-----
 
-const buttonGreen = document.querySelector("#b-green");
+const buttonGreen = document.querySelector(".b-green");
 buttonGreen.addEventListener("click", function () { callBackSound(audioGreen);  });
-const buttonRed = document.querySelector("#b-red");
+const buttonRed = document.querySelector(".b-red");
 buttonRed.addEventListener("click", function () { callBackSound(audioRed);  });
-const buttonYellow = document.querySelector("#b-yellow");
+const buttonYellow = document.querySelector(".b-yellow");
 buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow);  });
-const buttonBlue = document.querySelector("#b-blue");
+const buttonBlue = document.querySelector(".b-blue");
 buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
 
-
+/*
 const buttonStart = document.querySelector("#circle");
 buttonStart.addEventListener("click", function(){ 
     callBackSound(audioStart);
@@ -210,6 +207,7 @@ buttonStart.addEventListener("click", function(){
         game.state = true;
     };
 });
+*/
 const menuStart = document.querySelector("#start");
 menuStart.addEventListener("click", function(){ 
     callBackSound(audioStart);
