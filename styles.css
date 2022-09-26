@@ -248,7 +248,7 @@ br {
 
 #circle {
     position:absolute;
-    background: rgb(255, 255, 255);
+    background: #92A9BD;
     border-radius: 50%;
     width: 14rem;
     height: 14rem;
@@ -259,6 +259,18 @@ br {
     margin: auto;
     border-style: solid;
     border-width: 5px;
+    border-color: #2B2B2B;
+}
+
+#circle.light{
+    background: #D3DEDC;
+    border-color: #423F3E;
+  }
+
+#circle.mouseover {
+    background: #7C99AC;
+    border-color: #171010;
+
 }
 
 
