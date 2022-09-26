@@ -24,6 +24,8 @@ const state = {
     finish: 3,
 };
 
+let fakecount="JS generated!"; //a fakecount to simulate a fake score
+
 const buttons = ["green", "red", "yellow", "blue"];
 
 //Setting selflight colors
@@ -99,6 +101,21 @@ function computerPressRndColor(){
     console.log(htmlElemt);
 };
 
+//Bsc fnc to take a count and display it in th count screen
+function getCount(currentcount){
+    document.querySelector("#count").textContent = currentcount;
+};
+
+//Bsc fnc to take nmbr of lives and display it in LIVES
+function getLives(currentLives){
+    document.querySelector("#lives").textContent = currentLives;
+};
+
+//Bsc fnc to take an argument and display it in historie
+function getHistory(currenthistory){
+    document.querySelector(".historie").textContent = currenthistory;
+};
+
 function callBackSound(audioObj) {
     audioObj.load();
     audioObj.play();
@@ -113,15 +130,16 @@ buttonsProperties.blue.init();
 //-----Setting events-----
 
 const buttonGreen = document.querySelector("#b-green");
-buttonGreen.addEventListener("click", function () { callBackSound(audioGreen) });
+buttonGreen.addEventListener("click", function () { callBackSound(audioGreen);  });
 const buttonRed = document.querySelector("#b-red");
-buttonRed.addEventListener("click", function () { callBackSound(audioRed) });
+buttonRed.addEventListener("click", function () { callBackSound(audioRed);  });
 const buttonYellow = document.querySelector("#b-yellow");
-buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow)});
+buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow);  });
 const buttonBlue = document.querySelector("#b-blue");
-buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue)});
-const buttonStart = document.querySelector("#circle");
+buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
 
+
+const buttonStart = document.querySelector("#circle");
 buttonStart.addEventListener("click", function(){ 
     callBackSound(audioStart);
     if (game.state) {
@@ -155,6 +173,8 @@ hard.addEventListener("click", function(){
     game.difficulty = difficulty.hard;
     console.log(game.difficulty)
 });
+
+//--End of setting events--
 
 
 let count = 0;
