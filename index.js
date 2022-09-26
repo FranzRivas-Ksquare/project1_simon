@@ -1,34 +1,28 @@
-// ------------------------- Seting audio effects ------------------------------------
+// --------------------------- Setting up audio --------------------------------------
 const audioGreen = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
-audioGreen.autoplay = true;
-
 const audioRed = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
-audioRed.autoplay = true;
-
 const audioYellow = new Audio ("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
-audioYellow.autoplay = true;
-
 const audioBlue = new Audio ("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
-audioBlue.autoplay = true;
-
 const audioStart = new Audio ("./media/sounds/button-start.mp3");
-audioStart.autoplay = true;
-
 const audioWrong = new Audio("./media/sounds/button-wrong.mp3");
+
+audioGreen.autoplay = true;
+audioRed.autoplay = true;
+audioYellow.autoplay = true;
+audioBlue.autoplay = true;
+audioStart.autoplay = true;
 audioWrong.autoplay = false;
 
 // --------------------------- Setting var, arr, obj --------------------------------------
 
 const state = {
-    win: -1,
-    lose: -2,
-    start: 0, //Indicates when the game is running
-    userPlaying: 1, //When user is cliking
-    computerPlaying: 2, //When computer is drawin the patterns
-    finish: 3,
+    win: 0,
+    lose: -1,
+    start: false, //Indicates when the game is running
+    userTurn: false, //When user is cliking
+    cpuTurn: true, //When computer is drawin the patterns
+    finish: false,
 };
-
-let fakecount="JS generated!"; //a fakecount to simulate a fake score
 
 const difficulty = {
     easy: "easy",
@@ -36,132 +30,121 @@ const difficulty = {
     hard: "hard",
 };
 
-//Game settings
 const game =  {
+    lives: 1,
     level: 1,
-    state: state.start,
-    isStarted: false,
-    computerPressed: [],
-    userPressed: [],
     difficulty: difficulty,
+    state: state,
+    cpuSelect: [],
+    userSelect: [],
+    count: 0,
     message: "Ready to play",
-    score: 0,
 };
 
 const buttons = ["green", "red", "yellow", "blue"];
 
+const patronLogic = (element, value, name, audio) => {
+    element.addEventListener("click", () => {
+        if (answerValidation()) {
+            if (state.userTurn) game.userSelect.push(value);
+            callBackSound(audio);
+        } else {
+            audioWrong.play();
+            console.log(name);
+        }
+    });
+};
+
 //Setting selflight colors
 const buttonsProperties = {
     green: {
+        name: "green",
+        audio: audioGreen,
         colorPressed: "#02ffd1",
         color: "#038C73",
         htmlElemt: document.querySelector(".b-green"),
         value: 0,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                    console.log("green");
-                } else {
-                    callBackSound(audioGreen);
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
     red:  {
+        name: "red",
+        audio: audioRed,
         colorPressed: "#f94d27",
         color: "#9a250a",
         htmlElemt: document.querySelector(".b-red"),
         value: 1,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioRed); console.log("red");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
     yellow: {
+        name: "yellow",
+        audio: audioYellow,
         colorPressed: "#ffea06",
         color: "#8a7f09",
         htmlElemt: document.querySelector(".b-yellow"),
         value: 2,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioYellow); console.log("yellow");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
 
     blue: {
+        name: "blue",
+        audio: audioBlue,
         colorPressed:"#099df9",
         color: "#055b91",
         htmlElemt: document.querySelector(".b-blue"),
         value: 3,
         init: function () {
-            this.htmlElemt.addEventListener("click",  () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioBlue); console.log("blue");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
 };
 
-//Getting 1 random color to add...
-function randomButtonColor(){
-    const color =  buttons[Math.floor(Math.random() * 4)];
-    const buttonColor =  buttonsProperties[color];
-    return buttonColor;
-}
+// -------------------------------  functions -------------------------------------------------
 
-//Basic function to make de pc highligh a rndon color
-function computerPressRndColor(){
-    const rndBtnColor = randomButtonColor();
 
-    const { htmlElemt } = rndBtnColor; 
-    const lastClassName = htmlElemt.className;
-    htmlElemt.className =  `${htmlElemt.className}-active`;
-    setTimeout(()=>{
-        htmlElemt.className = lastClassName;
-    }, 1000);
-    console.log(htmlElemt);
-};
-
-//Bsc fnc to take a count and display it in th count screen
+// TODO: Take a count and display it in th count screen
 function getCount(currentcount){
     document.querySelector("#count").textContent = currentcount;
 };
 
-//Bsc fnc to take nmbr of lives and display it in LIVES
+// TODO: Take number of lives and display it in LIVES
 function getLives(currentLives){
     document.querySelector("#lives").textContent = currentLives;
 };
 
-//Bsc fnc to take an argument and display it in historie
+// TODO: Take an argument and display it in history
 function getHistory(currenthistory){
     document.querySelector(".historie").textContent = currenthistory;
 };
 
-function isUSerInputCorretUntilNow () {
-    console.log("user Pressed: ", game.userPressed);
-    return game.userPressed.some((value, index) => game.computerPressed[index] == value)
-}
-function resetInputs(array = []) {
-    array = [];
-}
+
+// --------------------------- GAME  functions ---------------------------------------
+
+// Random color generetor
+function randomButtonColor(){
+    let color =  buttons[Math.floor(Math.random() * 4)];
+    return buttonsProperties[color];
+};
+
+// Make the cpu highligh a randon color
+function computerPressRndColor(){
+    let { htmlElemt } = randomButtonColor(); 
+    let lastClassName = htmlElemt.className;
+    htmlElemt.className =  `${htmlElemt.className}-active`;
+    setTimeout(()=>{
+        htmlElemt.className = lastClassName;
+    }, 1000);
+};
+
+function answerValidation () {
+    console.log(`user Pressed: ${game.userSelect}`);
+    return game.userSelect.some((value, index) => game.cpuSelect[index] == value);
+};
 
 function callBackSound(audioObj) {
     audioObj.load();
@@ -174,18 +157,6 @@ buttonsProperties.red.init();
 buttonsProperties.yellow.init();
 buttonsProperties.blue.init();
 
-const buttonStart = document.querySelector("#circle");
-buttonStart.addEventListener("click", function() { 
-    callBackSound(audioStart);
-    game.state =  state.computerPlaying;
-    game.level = 1;
-    if (game.state) {
-        game.state = false;
-    } else {
-        game.state = true;
-    };
-});
-
 //-----Setting events-----
 
 const buttonGreen = document.querySelector(".b-green");
@@ -197,24 +168,24 @@ buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow);  
 const buttonBlue = document.querySelector(".b-blue");
 buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
 
-/*
-const buttonStart = document.querySelector("#circle");
-buttonStart.addEventListener("click", function(){ 
-    callBackSound(audioStart);
-    if (game.state) {
-        game.state = false;
-    } else {
-        game.state = true;
-    };
-});
-*/
 const menuStart = document.querySelector("#start");
 menuStart.addEventListener("click", function(){ 
     callBackSound(audioStart);
-    if (game.state) {
-        game.state = false;
+    if (state.start) {
+        state.start = false;
     } else {
-        game.state = true;
+        state.start = true;
+    };
+});
+
+const buttonStart = document.querySelector("#circle");
+buttonStart.addEventListener("click", function() { 
+    callBackSound(audioStart);
+    game.level = 1;
+    if (state.start) {
+        state.start = false;
+    } else {
+        state.start = true;
     };
 });
 
@@ -236,78 +207,77 @@ hard.addEventListener("click", function(){
 
 //--End of setting events--
 
-let count = 0;
+function main (game, state) {
 
-function main () {
+    switch (state.difficulty) {
+        case easy:
+            game.lives = 999
+            break;
+        case normal:
+            game.lives = 3
+            break
+        case hard:
+            game.lives = 1
+            break
+        default:
+            game.lives = 3
+    };
 
-    //Async Programming like a for infinity loop without blocking my page.
-    setInterval( async function () {
-        // computerPressRndColor(randomButtonColor());
-        // console.log(randomButtonColor());
-        // console.log(game);
+    setInterval( async function (game, state) {
 
-        switch (game.state) {
-            case state.userPlaying:
-                const isUserCorrectNow = isUSerInputCorretUntilNow(); //Read the current inputs, in case that user do a mistake it throw false
-                console.log("isCorrect: ", isUserCorrectNow);
-                if(!isUserCorrectNow) {
-                    game.computerPressed = [];
-                    game.userPressed = [];
-                    game.state =  state.computerPlaying;
-                    game.message = "You lose";
-                    game.sendMessage = true;
-                    game.level = 1;
-                    game.state = state.start;
-                } else if (isUserCorrectNow) {
-                    game.level++;
-                    const updatedLevel = game.level;
-                    game.computerPressed = [];
-                    game.userPressed = [];
-                    game.message = "You won, difficulty update to " + updatedLevel;
-                    game.sendMessage = true;
-                    game.score = updatedLevel - 1;
-                    game.state =  state.computerPlaying;
+        if (state.start) {
 
-                }
+            if (state.userTurn) {
+                    if (game.lives > 0) {
+                        if (answerValidation()) {
+                            game.count = game.count + 1;
+                            if (game.count == game.level) {
+                                game.level = game.level + 1;
+                            }
+                        } else {
+                            game.live = game.live - 1;
+                        }
+                    } else {
+                        game.level = 1;
+                        game.userSelect = [];
+                        game.cpuSelect = [];
+                        state.cpuTurn = true;
+                        state.start = false;
+                    }
+            };
 
-                if (game.sendMessage == true) {
-                    console.log(game.message);
-                    game.sendMessage = false;
-                }
-
-                
-                break;
-            case state.computerPlaying:
-                if (game.computerPressed.length < game.level){
-                    const rdnBtmColor =  randomButtonColor()
+            if (state.cpuTurn) {
+                if (game.cpuSelect.length <= game.level){
+                    let rdnBtmColor =  randomButtonColor()
                     await computerPressRndColor(rdnBtmColor);
-                    game.computerPressed.push(rdnBtmColor.value); //When computers click a button it is stored in global
-                    console.log(game);
+                    game.cpuSelect.push(rdnBtmColor.value); //When computers click a button it is stored in global
+                    console.log(game.cpuSelect);
+                    setTimeout( function () {
+                        console.log("show color");
+                    }, 1000);
                     //TODO: Ommit user interations with user
                 } else {
-                    game.state = state.userPlaying;
+                    state.userTurn = true;
                 }
+            }
 
-                break;
-        }
-        console.log("user: ", game.userPressed);
-        console.log("computer: ", game.computerPressed);
+        };
+        console.log("user: ", game.userSelect);
+        console.log("computer: ", game.cpuSelect);
         console.log("--------------------------------");
-    }, 2000 );
+    }, 1000 );
 
     setTimeout( function () {
         console.log("Async Programming");
-    }, 5000);
+    }, 1000);
 
     //Async Programming like a for infinity loop without blocking my page.
     setInterval( function () {
-        if (game.state) {
+        if (state.start) {
             computerPressRndColor(randomButtonColor());
         }
-
-        // console.log(randomButtonColor());
     }, 1000 );
 
 };
 
-main();
+main(game, state);
