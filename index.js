@@ -352,7 +352,7 @@ function main () {
                         game.userPressed = [];
                         game.message = "You won, level to " + updatedLevel;
                         game.sendMessage = true;
-                        game.score = updatedLevel - 1;
+                        game.score = (updatedLevel -1) * 10;
                         game.state =  state.computerPlaying;
                     }
                 } else {
@@ -386,6 +386,7 @@ function main () {
         }
         if (game.state != start.stop) {
             getLives(game.lives);
+            getCount(game.score);
             console.log("user: ", game.userPressed);
             console.log("computer: ", game.computerPressed);
             console.log("--------------------------------");
