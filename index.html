@@ -15,9 +15,9 @@
     <header>
         <h1>THE SIMON GAME</h1>
     </header>
-    <div class="game">
+    <div id="game">
 
-        <div class="leftparent">
+        <div id="leftparent">
             <div class="left">
                 <h2>Difficulty</h2>
                 <div class="difficulty">
@@ -39,23 +39,13 @@
 
         </div>
 
-        <div class="simonparent">
-            <div class="simon">
-                <button id="circle">
-                    <strong>SIMON!</strong>
-                </button>
-                <button class="b-green">
-                    green
-                </button>
-                <button class="b-red">
-                    red
-                </button>
-                <button class="b-blue">
-                    blue
-                </button>
-                <button class="b-yellow">
-                    yellow
-                </button>
+        <div id="simonparent">
+            <div id="simon">
+                <div id="circle"><h3>SIMON!</h3></div>
+                <div id="firstGrn"></div>
+                <div id="secondRed"></div>
+                <div id="thirdBlu"></div>
+                <div id="fourthYlw"></div>
             </div>
         </div>
 
@@ -77,7 +67,7 @@
         
     </div> <!--end of game container-->
     <!-- Good luck! -->
-
-    <script type="module" src="./index.js"></script>
+    <script  src="index.js"></script>
+    <!--<script type="module" src="./index.js"></script>-->
 </body>
 </html>

@@ -18,20 +18,24 @@ h2 {
     font-family: 'Bungee Spice', cursive;
 }
 
+h3 {
+    margin: auto;
+}
+
 
 br {
     margin-top: 5%;
     margin-bottom: 5%;
 }
 
-.game {
+#game {
     display: flex;
     flex-direction: row;
 }
 
 /* ----------------- <game> -------------------*/
 
-.leftparent
+#leftparent
 {
     flex-basis: 30%;
     display: flex;
@@ -53,7 +57,7 @@ br {
     text-align: center;
 }
 
-.simonparent
+#simonparent
 {
     flex-basis: 40%;
     display: flex;
@@ -68,8 +72,7 @@ br {
 }
 
 
-
-.simon {
+#simon {
     display: flex;
     display: grid;
     grid-template-areas: 
@@ -152,100 +155,94 @@ br {
 /* ----------------- <simon> -------------------*/
 
 
-.b-green {
-    grid-area: b-green;
-    background-color: #038C73;
+#firstGrn {
+    /*grid-area: b-green;*/
+    background: #3EC70B;
     border-top-left-radius: 20%;
     height: 17rem;
     width: 17rem;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #2B2B2B;
 }
 
-.b-green:hover{
-    background: #1b9c0f;
+#firstGrn.light{
+    background: #49FF00;
+    border-color: #423F3E;
+  }
+
+#firstGrn.mouseover {
+    background:#36AE7C;
+    border-color: #171010;
+
 }
 
-.b-green:active{
-    background: #02ffd1;
-}
-.b-green-active {
-    grid-area: b-green;
-    background: #02ffd1;   
-    border-top-left-radius: 20%;
-    height: 17rem;
-    width: 17rem;
-}
-
-
-
-.b-red {
+#secondRed {
     grid-area: b-red;
-    background-color: #9a250a;
+    background-color: #C21010;
     border-top-right-radius: 20%;
     height: 17rem;
     width: 17rem;
-}
-.b-red:active {
-    background-color: #f94d27;
-}
-
-.b-red:hover{
-    background-color: #80343483;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #2B2B2B;
 }
 
-.b-red-active {
-    grid-area: b-red;
-    background-color: #f94d27;   
-    border-top-right-radius: 20%;
-    height: 17rem;
-    width: 17rem;
+#secondRed.light{
+    background: #FF0000;
+    border-color: #423F3E;
+  }
+
+#secondRed.mouseover {
+    background:#E64848;
+    border-color: #171010;
+
 }
 
-.b-blue {
+
+#thirdBlu {
     grid-area: b-blue;
-    background-color: #055b91;   
+    background-color: #0096FF;   
     border-bottom-right-radius: 20%;
     height: 17rem;
     width: 17rem;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #2B2B2B;
 }
 
-.b-blue:active {
-    background-color: #099df9;   
+#thirdBlu.light{
+    background: #00D7FF;
+    border-color: #423F3E;
+  }
+
+#thirdBlu.mouseover {
+    background:#4D96FF;
+    border-color: #171010;
+
 }
 
-.b-blue:hover {
-    background-color: #044c7979;
-}
 
-.b-blue-active {
-    grid-area: b-blue;
-    background-color: #099df9;   
-    border-bottom-right-radius: 20%;
-    height: 17rem;
-    width: 17rem;
-}
-
-.b-yellow {
+#fourthYlw {
     grid-area: b-yellow;
-    background-color: #554f12;
+    background-color: #F7EC09;
     border-bottom-left-radius: 20%;
     height: 17rem;
     width: 17rem;
+    border-style: solid;
+    border-width: 5px;
+    border-color: #2B2B2B;
 }
 
-.b-yellow:active {
-    background-color: #eeff00;
-}
+#fourthYlw.light{
+    background: #FBFF00;
+    border-color: #423F3E;
+  }
 
-.b-yellow:hover {
-    background-color: #fcf5a7;
-}
+#fourthYlw.mouseover {
+    background:#FFD93D;
+    border-color: #171010;
 
-.b-yellow-active {
-    grid-area: b-yellow;
-    background-color: #eeff00;
-    border-bottom-left-radius: 20%;
-    height: 17rem;
-    width: 17rem;
 }
 
 
@@ -253,23 +250,17 @@ br {
     position:absolute;
     background: rgb(255, 255, 255);
     border-radius: 50%;
-    width: 12rem;
-    height: 12rem;
+    width: 14rem;
+    height: 14rem;
     color: #0D0D0D;
-    text-align: center;
+    display: flex;
     font-family: 'New Athletic';
-    /*font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;*/
-    font-size: 48px;
+    font-size: 38px;
     margin: auto;
+    border-style: solid;
+    border-width: 5px;
 }
 
-#circle:hover {
-background-color: #485B73;
-}
-
-#circle:active {
-    background-color: #cccccc;
-}
 
 /* ----------------- <right> -------------------*/
 
@@ -292,7 +283,8 @@ background-color: #485B73;
 /* ----------------- <main> -------------------*/
 
 #start {
-    background-color: #485B73;
+    /*background-color: #485B73;*/
+    background-color: #a17199;
     border: none;
     border-radius: 3%;
     color: white;
@@ -304,11 +296,6 @@ background-color: #485B73;
     font-size: 16px;
 }
 
-#start:active {
-    background-color: #121B26;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
 
 #count {
     background-color: #485B73;

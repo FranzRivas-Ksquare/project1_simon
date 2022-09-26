@@ -1,110 +1,6 @@
-// --------------------------- Setting up audio --------------------------------------
-const audioGreen = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
-const audioRed = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
-const audioYellow = new Audio ("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
-const audioBlue = new Audio ("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
-const audioStart = new Audio ("./media/sounds/button-start.mp3");
-const audioWrong = new Audio("./media/sounds/button-wrong.mp3");
 
-audioGreen.autoplay = true;
-audioRed.autoplay = true;
-audioYellow.autoplay = true;
-audioBlue.autoplay = true;
-audioStart.autoplay = true;
-audioWrong.autoplay = false;
 
-// --------------------------- Setting var, arr, obj --------------------------------------
-
-const state = {
-    win: 0,
-    lose: -1,
-    start: false, //Indicates when the game is running
-    userTurn: false, //When user is cliking
-    computerTurn: true, //When computer is drawin the patterns
-    finish: false,
-};
-
-const difficulty = {
-    easy: "easy",
-    normal: "normal",
-    hard: "hard",
-};
-
-const game =  {
-    level: 1,
-    difficulty: difficulty,
-    state: state.start,
-    cpuSelect: [],
-    userSelect: [],
-    score: 0,
-    message: "Ready to play",
-};
-
-const buttons = ["green", "red", "yellow", "blue"];
-
-const patronLogic = (element, value, name, audio) => {
-    element.addEventListener("click", () => {
-        if (userTurn) game.userSelect.push(value);
-        if (!answerValidation()) {
-            audioWrong.play();
-            console.log(name);
-        } else {
-            callBackSound(audio);
-        }
-    });
-};
-
-//Setting selflight colors
-const buttonsProperties = {
-    green: {
-        name: "green",
-        audio: audioGreen,
-        colorPressed: "#02ffd1",
-        color: "#038C73",
-        htmlElemt: document.querySelector(".b-green"),
-        value: 0,
-        init: function () {
-            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
-        }
-    },
-    red:  {
-        name: "red",
-        audio: audioRed,
-        colorPressed: "#f94d27",
-        color: "#9a250a",
-        htmlElemt: document.querySelector(".b-red"),
-        value: 1,
-        init: function () {
-            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
-        }
-    },
-    yellow: {
-        name: "yellow",
-        audio: audioYellow,
-        colorPressed: "#ffea06",
-        color: "#8a7f09",
-        htmlElemt: document.querySelector(".b-yellow"),
-        value: 2,
-        init: function () {
-            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
-        }
-    },
-
-    blue: {
-        name: "blue",
-        audio: audioBlue,
-        colorPressed:"#099df9",
-        color: "#055b91",
-        htmlElemt: document.querySelector(".b-blue"),
-        value: 3,
-        init: function () {
-            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
-        }
-    },
-};
-
-// -------------------------------  functions -------------------------------------------------
-
+//--------------Functions-------------
 
 // TODO: Take a count and display it in th count screen
 function getCount(currentcount){
@@ -121,165 +17,86 @@ function getHistory(currenthistory){
     document.querySelector(".historie").textContent = currenthistory;
 };
 
+//------------Events-----------
 
-// --------------------------- GAME  functions ---------------------------------------
+//--For clicking and moving mouse
+//green
+const firstGrn = document.querySelector('#firstGrn');
 
-// Random color generetor
-function randomButtonColor(){
-    let color =  buttons[Math.floor(Math.random() * 4)];
-    return buttonsProperties[color];
-};
-
-// Make the cpu highligh a randon color
-function computerPressRndColor(){
-    let { htmlElemt } = randomButtonColor(); 
-    let lastClassName = htmlElemt.className;
-    htmlElemt.className =  `${htmlElemt.className}-active`;
-    setTimeout(()=>{
-        htmlElemt.className = lastClassName;
-    }, 1000);
-    console.log(htmlElemt);
-};
-
-function answerValidation () {
-    console.log(`user Pressed: ${game.userSelect}`);
-    return game.userSelect.some((value, index) => game.cpuSelect[index] == value);
-};
-
-function resetInputs(array) {
-    array = [];
-}
-
-function callBackSound(audioObj) {
-    audioObj.load();
-    audioObj.play();
-};
-
-//Initializing our colors to highligh
-buttonsProperties.green.init();
-buttonsProperties.red.init();
-buttonsProperties.yellow.init();
-buttonsProperties.blue.init();
-
-//-----Setting events-----
-
-const buttonGreen = document.querySelector(".b-green");
-buttonGreen.addEventListener("click", function () { callBackSound(audioGreen);  });
-const buttonRed = document.querySelector(".b-red");
-buttonRed.addEventListener("click", function () { callBackSound(audioRed);  });
-const buttonYellow = document.querySelector(".b-yellow");
-buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow);  });
-const buttonBlue = document.querySelector(".b-blue");
-buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
-
-const menuStart = document.querySelector("#start");
-menuStart.addEventListener("click", function(){ 
-    callBackSound(audioStart);
-    if (game.state) {
-        game.state = false;
-    } else {
-        game.state = true;
-    };
+firstGrn.addEventListener('click', function()
+{
+    firstGrn.setAttribute('class', 'light');
 });
 
-const buttonStart = document.querySelector("#circle");
-buttonStart.addEventListener("click", function() { 
-    callBackSound(audioStart);
-    game.level = 1;
-    if (game.state) {
-        game.state = false;
-    } else {
-        game.state = true;
-    };
+firstGrn.addEventListener('mouseenter', function()
+{
+    firstGrn.setAttribute('class', 'mouseover');
 });
 
-const easy = document.querySelector("#easy");
-easy.addEventListener("click", function(){
-    game.difficulty = difficulty.easy;
-    console.log(game.difficulty)
-});
-const normal = document.querySelector("#normal");
-normal.addEventListener("click", function(){
-    game.difficulty = difficulty.normal;
-    console.log(game.difficulty)
-});
-const hard = document.querySelector("#hard");
-hard.addEventListener("click", function(){
-    game.difficulty = difficulty.hard;
-    console.log(game.difficulty)
+firstGrn.addEventListener('mouseleave', function()
+{
+    firstGrn.removeAttribute('class', 'mouseover')
 });
 
-//--End of setting events--
 
-let count = 0;
+//red
+const secondRed = document.querySelector('#secondRed');
 
-function main () {
+secondRed.addEventListener('click', function()
+{
+    secondRed.setAttribute('class', 'light');
+});
 
-    //Async Programming like a for infinity loop without blocking my page.
-    setInterval( async function () {
+secondRed.addEventListener('mouseenter', function()
+{
+    secondRed.setAttribute('class', 'mouseover');
+});
 
-        switch (game.state) {
-            case state.userPlaying:
-                const isUserCorrectNow = answerValidation(); //Read the current inputs, in case that user do a mistake it throw false
-                console.log("isCorrect: ", isUserCorrectNow);
-                if(!isUserCorrectNow) {
-                    game.cpuSelect = [];
-                    game.userSelect = [];
-                    game.state =  state.computerPlaying;
-                    game.message = "You lose";
-                    game.sendMessage = true;
-                    game.level = 1;
-                    game.state = state.start;
-                } else if (isUserCorrectNow) {
-                    game.level++;
-                    const updatedLevel = game.level;
-                    game.cpuSelect = [];
-                    game.userSelect = [];
-                    game.message = "You won, difficulty update to " + updatedLevel;
-                    game.sendMessage = true;
-                    game.score = updatedLevel - 1;
-                    game.state =  state.computerPlaying;
+secondRed.addEventListener('mouseleave', function()
+{
+    secondRed.removeAttribute('class', 'mouseover')
+});
 
-                }
 
-                if (game.sendMessage == true) {
-                    console.log(game.message);
-                    game.sendMessage = false;
-                }
+//blue
+const thirdBlu = document.querySelector('#thirdBlu');
 
-                
-                break;
-            case state.computerPlaying:
-                if (game.cpuSelect.length < game.level){
-                    const rdnBtmColor =  randomButtonColor()
-                    await computerPressRndColor(rdnBtmColor);
-                    game.cpuSelect.push(rdnBtmColor.value); //When computers click a button it is stored in global
-                    console.log(game);
-                    //TODO: Ommit user interations with user
-                } else {
-                    game.state = state.userPlaying;
-                }
+thirdBlu.addEventListener('click', function()
+{
+    thirdBlu.setAttribute('class', 'light');
+});
 
-                break;
-        }
-        console.log("user: ", game.userSelect);
-        console.log("computer: ", game.cpuSelect);
-        console.log("--------------------------------");
-    }, 2000 );
+thirdBlu.addEventListener('mouseenter', function()
+{
+    thirdBlu.setAttribute('class', 'mouseover');
+});
 
-    setTimeout( function () {
-        console.log("Async Programming");
-    }, 5000);
+thirdBlu.addEventListener('mouseleave', function()
+{
+    thirdBlu.removeAttribute('class', 'mouseover')
+});
 
-    //Async Programming like a for infinity loop without blocking my page.
-    setInterval( function () {
-        if (game.state) {
-            computerPressRndColor(randomButtonColor());
-        }
+//yellow
+const fourthYlw = document.querySelector('#fourthYlw');
 
-        // console.log(randomButtonColor());
-    }, 1000 );
+fourthYlw.addEventListener('click', function()
+{
+    fourthYlw.setAttribute('class', 'light');
+});
 
-};
+fourthYlw.addEventListener('mouseenter', function()
+{
+    fourthYlw.setAttribute('class', 'mouseover');
+});
 
-main();
+fourthYlw.addEventListener('mouseleave', function()
+{
+    fourthYlw.removeAttribute('class', 'mouseover')
+});
+
+
+
+const start = document.querySelector('start');
+start.addEventListener('click', function(){
+    document.querySelector("#count").textContent = "esto es un evento";
+});
