@@ -346,23 +346,23 @@ function main () {
                 if (game.lives >= 1 ) {
                     const isUserCorrectNow = isUSerInputCorretUntilNow(); //Read the current inputs, in case that user do a mistake it throw false
                     if ((game.userPressed.length == game.computerPressed.length) &&  game.userPressed.length != 0 && isUserCorrectNow) {
-                            game.level++;
-                            const updatedLevel = game.level;
-                            game.computerPressed = [];
-                            game.userPressed = [];
-                            game.message = "You won, level to " + updatedLevel;
-                            game.sendMessage = true;
-                            game.score = updatedLevel - 1;
-                            game.state =  state.computerPlaying;
+                        game.level++;
+                        const updatedLevel = game.level;
+                        game.computerPressed = [];
+                        game.userPressed = [];
+                        game.message = "You won, level to " + updatedLevel;
+                        game.sendMessage = true;
+                        game.score = updatedLevel - 1;
+                        game.state =  state.computerPlaying;
                     }
                 } else {
-                    console.log("perdiendo brooooo");
-                            game.computerPressed = [];
-                            game.userPressed = [];
-                            game.message = "You lose";
-                            game.sendMessage = true;
-                            game.level = 1;
-                            game.state = state.start;
+                    game.computerPressed = [];
+                    game.userPressed = [];
+                    game.message = "You lose";
+                    game.sendMessage = true;
+                    game.level = 1;
+                    game.lives = 3;
+                    game.state = state.start;
                 }
 
                 if (game.sendMessage == true) {
