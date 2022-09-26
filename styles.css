@@ -157,7 +157,7 @@ br {
 
 #firstGrn {
     /*grid-area: b-green;*/
-    background: #3EC70B;
+    background: #2c890b;
     border-top-left-radius: 20%;
     height: 17rem;
     width: 17rem;
@@ -168,11 +168,11 @@ br {
 
 #firstGrn.light{
     background: #49FF00;
-    border-color: #423F3E;
+    border-color: #fb019b;
   }
 
 #firstGrn.mouseover {
-    background:#36AE7C;
+    /* background:#36AE7C; */
     border-color: #171010;
 
 }
@@ -190,13 +190,12 @@ br {
 
 #secondRed.light{
     background: #FF0000;
-    border-color: #423F3E;
+    border-color: #fb019b;
   }
 
 #secondRed.mouseover {
-    background:#E64848;
+    /* background:#E64848; */
     border-color: #171010;
-
 }
 
 
@@ -213,13 +212,12 @@ br {
 
 #thirdBlu.light{
     background: #00D7FF;
-    border-color: #423F3E;
-  }
+    border-color: #fb019b;
+}
 
 #thirdBlu.mouseover {
-    background:#4D96FF;
+    /* background:#4D96FF; */
     border-color: #171010;
-
 }
 
 
@@ -236,13 +234,12 @@ br {
 
 #fourthYlw.light{
     background: #FBFF00;
-    border-color: #423F3E;
+    border-color: #fb019b;
   }
 
 #fourthYlw.mouseover {
-    background:#FFD93D;
+    /* background:#FFD93D; */
     border-color: #171010;
-
 }
 
 
