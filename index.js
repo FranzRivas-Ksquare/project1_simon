@@ -67,6 +67,7 @@ function callBackListener(){
                 game.userPressed.pop();
             } else {
                 this.audio.play();
+                this.htmlElemt.classList.remove(this.htmlElemt.className);
             }
         }
     });
@@ -145,13 +146,19 @@ function randomButtonColor(){
 }
 
 // Mimic a button pressed
-function computerPressRndColor(rndBtnColor){
+async function computerPressRndColor(rndBtnColor){
     const { htmlElemt } = rndBtnColor; 
-    const lastClassName = htmlElemt.className;
-    htmlElemt.className =  `${htmlElemt.className}-active`;
-    setTimeout(()=>{
-        htmlElemt.className = lastClassName;
-    }, 1000);
+    //mimic a press like a generic human.
+    function mimicPressWithDelay () {
+        htmlElemt.className =  `light`;
+        return new Promise ( (resolve, reject) => {
+            setTimeout(()=> {
+                htmlElemt.classList.remove(htmlElemt.className);
+                resolve();
+            }, 500);
+        })
+    } ;
+    await mimicPressWithDelay();
     console.log(htmlElemt);
 }
 
@@ -353,7 +360,10 @@ function main () {
                         game.message = "You won, level to " + updatedLevel;
                         game.sendMessage = true;
                         game.score = (updatedLevel -1) * 10;
-                        game.state =  state.computerPlaying;
+                        setTimeout(() => {
+                            game.state =  state.computerPlaying;
+                        }, 1000);
+
                     }
                 } else {
                     game.computerPressed = [];
@@ -391,7 +401,7 @@ function main () {
             console.log("computer: ", game.computerPressed);
             console.log("--------------------------------");
         }
-    }, 100 );
+    }, 1000 );
 };
 
 main();
