@@ -115,6 +115,24 @@ fourthYlw.addEventListener('mouseleave', function()
     removeDimm(fourthYlw);
 });
 
+//---Circle
+
+const circle = document.querySelector('#circle');
+
+circle.addEventListener('click', function()
+{
+    lightOn(circle);
+});
+
+circle.addEventListener('mouseenter', function()
+{
+    dimmOver(circle);
+});
+
+circle.addEventListener('mouseleave', function()
+{
+    removeDimm(circle);
+});
 
 
 const start = document.querySelector('start');
