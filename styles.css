@@ -152,7 +152,7 @@ br {
 /* ----------------- <simon> -------------------*/
 
 
-#b-green {
+.b-green {
     grid-area: b-green;
     background-color: #038C73;
     border-top-left-radius: 20%;
@@ -160,33 +160,47 @@ br {
     width: 17rem;
 }
 
-#b-green:hover{
+.b-green:hover{
     background: #1b9c0f;
 }
 
-#b-green:active{
+.b-green:active{
     background: #02ffd1;
+}
+.b-green-active {
+    grid-area: b-green;
+    background: #02ffd1;   
+    border-top-left-radius: 20%;
+    height: 17rem;
+    width: 17rem;
 }
 
 
 
-#b-red {
+.b-red {
     grid-area: b-red;
     background-color: #9a250a;
     border-top-right-radius: 20%;
     height: 17rem;
     width: 17rem;
 }
-
-#b-red:hover{
-    background-color: #80343483;
-}
-
-#b-red:active {
+.b-red:active {
     background-color: #f94d27;
 }
 
-#b-blue {
+.b-red:hover{
+    background-color: #80343483;
+}
+
+.b-red-active {
+    grid-area: b-red;
+    background-color: #f94d27;   
+    border-top-right-radius: 20%;
+    height: 17rem;
+    width: 17rem;
+}
+
+.b-blue {
     grid-area: b-blue;
     background-color: #055b91;   
     border-bottom-right-radius: 20%;
@@ -194,32 +208,44 @@ br {
     width: 17rem;
 }
 
-#b-blue:hover {
-    background-color: #044c7979;
-}
-
-#b-blue:active {
+.b-blue:active {
     background-color: #099df9;   
 }
 
-#b-yellow {
+.b-blue:hover {
+    background-color: #044c7979;
+}
+
+.b-blue-active {
+    grid-area: b-blue;
+    background-color: #099df9;   
+    border-bottom-right-radius: 20%;
+    height: 17rem;
+    width: 17rem;
+}
+
+.b-yellow {
     grid-area: b-yellow;
-    background-color: #baab04;
+    background-color: #554f12;
     border-bottom-left-radius: 20%;
     height: 17rem;
     width: 17rem;
 }
 
-#b-yellow {
-    background-color: #baab047b;
+.b-yellow:active {
+    background-color: #eeff00;
 }
 
-#b-yellow:hover {
+.b-yellow:hover {
     background-color: #fcf5a7;
 }
 
-#b-yellow:active {
-    background-color: #ffea06;
+.b-yellow-active {
+    grid-area: b-yellow;
+    background-color: #eeff00;
+    border-bottom-left-radius: 20%;
+    height: 17rem;
+    width: 17rem;
 }
 
 
