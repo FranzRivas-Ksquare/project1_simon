@@ -1,3 +1,12 @@
+//Global counters
+let playing=false; //To know if some game is being played
+let PCturn=false; //To know if pc is playing
+let lives=3; //to count left lives
+let level=0; //To know actual level
+let left=20; //To know how many levels (not vary wgen a game is being played)
+let pressed=0; //To store the pressed button (may be not necesary)
+let correct=0; //To store and compare the correct value
+
 //-------------------------------------
 //HERE GOES THE INITIALIZATION FOR SOUNDS
 //-----PLEASE BE CAREFUL WHEN ADDING-----
@@ -38,6 +47,36 @@ function removeDimm(btncolor){
     btncolor.removeAttribute('class', 'mouseover');
     };
 
+
+
+//----SIMON AUX FUNCTIONS-----
+function startgame()
+{
+    level=1;
+    left=20;
+    lives=3;
+    playing=true;
+    getHistory("Game would Strt");
+    getLives(lives);
+    getCount(level);
+}
+
+function stopgame()
+{
+    level=0;
+    left=20;
+    lives=3;
+    playing=false;
+    getHistory("Game would STOP");
+    getLives("NO GAME");
+    getCount(level);
+    
+}
+
+
+
+//--SIMN AUX FUNCTIONS---
+
 //------------Events-----------
 
 //--For clicking and moving mouse
@@ -46,7 +85,9 @@ const firstGrn = document.querySelector('#firstGrn');
 
 firstGrn.addEventListener('click', function()
 {
-    lightOn(firstGrn);
+    if(playing==false){
+        lightOn(firstGrn);
+    }
 });
 
 firstGrn.addEventListener('mouseenter', function()
@@ -121,7 +162,18 @@ const circle = document.querySelector('#circle');
 
 circle.addEventListener('click', function()
 {
-    lightOn(circle);
+    level=0;
+
+    if(playing==false){
+        lightOn(circle);
+        getHistory("Game Started");
+        playing=true;
+    }
+
+    else if (playing==true){
+        getHistory("Game Reestarted");
+    }
+    
 });
 
 circle.addEventListener('mouseenter', function()
@@ -134,8 +186,24 @@ circle.addEventListener('mouseleave', function()
     removeDimm(circle);
 });
 
+//---Start
 
-const start = document.querySelector('start');
+const start = document.querySelector('#start');
 start.addEventListener('click', function(){
-    document.querySelector("#count").textContent = "esto es un evento";
+
+    lightOn(start);
+    level=0;
+
+    if(playing==false){
+        startgame();
+    }
+    
+    if(playing==true){
+        getHistory("Game Stoped");
+        playing=false;
+    }
+});
+
+start.addEventListener('mouseleave', function(){
+removeDimm(start);
 });
