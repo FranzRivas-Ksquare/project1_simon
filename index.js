@@ -2,11 +2,13 @@
 let playing=false; //To know if some game is being played
 let PCturn=false; //To know if pc is playing
 let lives=3; //to count left lives
-let level=0; //To know actual level
-let left=20; //To know how many levels (not vary wgen a game is being played)
-let pressed=0; //To store the pressed button (may be not necesary)
+let lvl=0; //To know actual level
+let lastpressed=0; //To store the pressed button (may be not necesary)
 let correct=0; //To store and compare the correct value
 let dificult=2;
+let remain=1; //To know remaining answers to pass level
+let gameArray=[1,1,1,1,1,1,1];
+let toWin=3; //Level needed to win
 
 //dummy variables
 
@@ -53,6 +55,7 @@ function removeDimm(btncolor){
 
 
 
+
 //----SIMON AUX FUNCTIONS-----
 function startgame()
 {
@@ -66,26 +69,32 @@ function startgame()
         case 4:{getHistory("DARK SOULS MODE");
     break;}  
     }
+    lvl=1;
+    remain=1;
     
-    level=1;
-    left=4;
     lives=3;
     playing=true;
     getLives(lives);
-    getCount(level);
+    getCount(lvl);
     /*gameArray=HERE GOES A FUNCTION THAT TAKES A LENGTH and returns a 
     random array of numbers from (1-4) of N LENGHT (1 argument)*/
-    gameArray=[2,3,4,5]; //Tutorial array
 }
 
 function stopgame()
 {
-    level=0;
-    left=20;
     playing=false;
     getHistory("STOPPED");
     getLives("NO GAME");
-    getCount("0");
+    //getCount("NO GAME");
+    
+}
+
+function Wingame()
+{
+    playing=false;
+    getHistory("YOU WIN");
+    getLives("YOU WIN");
+    getCount("WINNER");
     
 }
 
@@ -102,18 +111,54 @@ function restartgame()
     break;}  
     }
 
-    level=1;
-    left=4;
+    lvl=1;
+    remain=1;
     lives=1; //Setted 1 live to see a change
     playing=true;
-    gameArray=[1,3,2,1];
+    //gameArray=[1,3,2,1]; //different array in extra mode
     getLives(lives);
-    getCount(level);
+    getCount(lvl);
 }
 
-function printCrrntSec(arr, turn)
-{
 
+function lvlpassed(){
+    lvl++;
+    remain=lvl;
+    getHistory("LEvel passed");
+    getCount(lvl);
+}
+
+function chkAnswer(place){
+    if(gameArray[lvl-remain]==lastpressed) //a good answer
+        {
+            remain--;
+
+            if(remain==0){
+                lvlpassed();
+                if(lvl>toWin)
+                {
+                    Wingame();
+                }
+            }
+            else{
+                lightOn(place);
+                getHistory("Correct!");
+            }
+
+        }
+
+    else if(gameArray[lvl-remain]!=lastpressed) //Bad answer
+    {
+        getHistory("WRONG")
+        lives--;
+        getLives(lives);
+        if(lives==0)
+        {
+            stopgame();
+            getHistory("YOU LOOSE");
+        }
+        
+    }
 }
 
 
@@ -127,8 +172,16 @@ const firstGrn = document.querySelector('#firstGrn');
 
 firstGrn.addEventListener('click', function()
 {
+    lastpressed=1;
     if(playing==false){
-        lightOn(firstGrn);
+        lightOn(firstGrn); //lightOn(Object)
+    }
+    //game behavior
+    if(playing==true && PCturn==false)
+    {
+            //Checking last pressed
+        chkAnswer(firstGrn);
+        
     }
 });
 
@@ -148,7 +201,17 @@ const secondRed = document.querySelector('#secondRed');
 
 secondRed.addEventListener('click', function()
 {
-    lightOn(secondRed);
+    lastpressed=2;
+    if(playing==false){
+        lightOn(secondRed); //lightOn(Object)
+    }
+    //game behavior
+    if(playing==true && PCturn==false)
+    {
+            //Checking last pressed
+        chkAnswer(secondRed);
+        
+    }
 });
 
 secondRed.addEventListener('mouseenter', function()
@@ -167,7 +230,17 @@ const thirdBlu = document.querySelector('#thirdBlu');
 
 thirdBlu.addEventListener('click', function()
 {
-    lightOn(thirdBlu);
+    lastpressed=3;
+    if(playing==false){
+        lightOn(thirdBlu); //lightOn(Object)
+    }
+    //game behavior
+    if(playing==true && PCturn==false)
+    {
+            //Checking last pressed
+        chkAnswer(thirdBlu);
+        
+    }
 });
 
 thirdBlu.addEventListener('mouseenter', function()
@@ -185,7 +258,17 @@ const fourthYlw = document.querySelector('#fourthYlw');
 
 fourthYlw.addEventListener('click', function()
 {
-    lightOn(fourthYlw);
+    lastpressed=2;
+    if(playing==false){
+        lightOn(secondRed); //lightOn(Object)
+    }
+    //game behavior
+    if(playing==true && PCturn==false)
+    {
+            //Checking last pressed
+        chkAnswer(secondRed);
+        
+    }
 });
 
 fourthYlw.addEventListener('mouseenter', function()
