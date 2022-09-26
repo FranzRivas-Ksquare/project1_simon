@@ -6,6 +6,10 @@ let level=0; //To know actual level
 let left=20; //To know how many levels (not vary wgen a game is being played)
 let pressed=0; //To store the pressed button (may be not necesary)
 let correct=0; //To store and compare the correct value
+let dificult=2;
+
+//dummy variables
+
 
 //-------------------------------------
 //HERE GOES THE INITIALIZATION FOR SOUNDS
@@ -52,27 +56,65 @@ function removeDimm(btncolor){
 //----SIMON AUX FUNCTIONS-----
 function startgame()
 {
+    switch(dificult){
+        case 1:{getHistory("STARTED EASY");
+    break;}
+        case 2:{getHistory("STARTED NORMAL");
+    break;}
+        case 3:{getHistory("STARTED HARD");
+    break;}
+        case 4:{getHistory("DARK SOULS MODE");
+    break;}  
+    }
+    
     level=1;
-    left=20;
+    left=4;
     lives=3;
     playing=true;
-    getHistory("Game would Strt");
     getLives(lives);
     getCount(level);
+    /*gameArray=HERE GOES A FUNCTION THAT TAKES A LENGTH and returns a 
+    random array of numbers from (1-4) of N LENGHT (1 argument)*/
+    gameArray=[2,3,4,5]; //Tutorial array
 }
 
 function stopgame()
 {
     level=0;
     left=20;
-    lives=3;
     playing=false;
-    getHistory("Game would STOP");
+    getHistory("STOPPED");
     getLives("NO GAME");
-    getCount(level);
+    getCount("0");
     
 }
 
+function restartgame()
+{
+    switch(dificult){
+        case 1:{getHistory("reset EASY");
+    break;}
+        case 2:{getHistory("reset NORMAL");
+    break;}
+        case 3:{getHistory("reset HARD");
+    break;}
+        case 4:{getHistory("reset MODE");
+    break;}  
+    }
+
+    level=1;
+    left=4;
+    lives=1; //Setted 1 live to see a change
+    playing=true;
+    gameArray=[1,3,2,1];
+    getLives(lives);
+    getCount(level);
+}
+
+function printCrrntSec(arr, turn)
+{
+
+}
 
 
 //--SIMN AUX FUNCTIONS---
@@ -163,15 +205,14 @@ const circle = document.querySelector('#circle');
 circle.addEventListener('click', function()
 {
     level=0;
+    lightOn(circle);
 
     if(playing==false){
-        lightOn(circle);
-        getHistory("Game Started");
-        playing=true;
+        startgame();
     }
 
     else if (playing==true){
-        getHistory("Game Reestarted");
+        restartgame()
     }
     
 });
@@ -192,18 +233,37 @@ const start = document.querySelector('#start');
 start.addEventListener('click', function(){
 
     lightOn(start);
-    level=0;
 
     if(playing==false){
         startgame();
     }
     
-    if(playing==true){
-        getHistory("Game Stoped");
-        playing=false;
+    else if(playing==true){
+        stopgame();
     }
 });
 
 start.addEventListener('mouseleave', function(){
 removeDimm(start);
 });
+
+//Dificult buttons
+const easy = document.querySelector('#easy');
+easy.addEventListener('click', function(){
+getHistory('easy-pressed');
+dificult=1; 
+});
+
+const normal = document.querySelector('#normal');
+normal.addEventListener('click', function(){
+getHistory('normal-pressed');
+dificult=2; 
+});
+
+const hard = document.querySelector('#hard');
+hard.addEventListener('click', function(){
+getHistory('hard-pressed');
+dificult=3; 
+});
+
+//---end of events---//
