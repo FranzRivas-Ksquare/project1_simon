@@ -50,72 +50,63 @@ const game =  {
 
 const buttons = ["green", "red", "yellow", "blue"];
 
+const patronLogic = (element, value, name, audio) => {
+    element.addEventListener("click", () => {
+        if (!game.state != state.computerPlaying) game.userPressed.push(value);
+        if (!isUSerInputCorretUntilNow()) {
+            audioWrong.play();
+            console.log(name);
+        } else {
+            callBackSound(audio);
+        }
+    });
+};
+
 //Setting selflight colors
 const buttonsProperties = {
     green: {
+        name: "green",
+        audio: audioGreen,
         colorPressed: "#02ffd1",
         color: "#038C73",
         htmlElemt: document.querySelector(".b-green"),
         value: 0,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                    console.log("green");
-                } else {
-                    callBackSound(audioGreen);
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
     red:  {
+        name: "red",
+        audio: audioRed,
         colorPressed: "#f94d27",
         color: "#9a250a",
         htmlElemt: document.querySelector(".b-red"),
         value: 1,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioRed); console.log("red");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
     yellow: {
+        name: "yellow",
+        audio: audioYellow,
         colorPressed: "#ffea06",
         color: "#8a7f09",
         htmlElemt: document.querySelector(".b-yellow"),
         value: 2,
         init: function () {
-            this.htmlElemt.addEventListener("click", () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioYellow); console.log("yellow");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
 
     blue: {
+        name: "blue",
+        audio: audioBlue,
         colorPressed:"#099df9",
         color: "#055b91",
         htmlElemt: document.querySelector(".b-blue"),
         value: 3,
         init: function () {
-            this.htmlElemt.addEventListener("click",  () => {
-                if (!game.state != state.computerPlaying) game.userPressed.push(this.value);
-                if (!isUSerInputCorretUntilNow()) {
-                    audioWrong.play();
-                } else {
-                    callBackSound(audioBlue); console.log("blue");
-                }
-            });
+            patronLogic(this.htmlElemt, this.value, this.name, this.audio)
         }
     },
 };
