@@ -1,3 +1,4 @@
+// ------------------------- Seting audio effects ------------------------------------
 const audioGreen = new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
 audioGreen.autoplay = true;
 
@@ -16,14 +17,18 @@ audioStart.autoplay = true;
 const audioWrong = new Audio("./media/sounds/button-wrong.mp3");
 audioWrong.autoplay = false;
 
+// --------------------------- Setting var, arr, obj --------------------------------------
+
 const state = {
     win: -1,
     lose: -2,
-    start: 0,
+    start: false, //Indicates when the game is running
     userPlaying: 1, //When user is cliking
     computerPlaying: 2, //When computer is drawin the patterns
     finish: 3,
-}
+};
+
+let fakecount="JS generated!"; //a fakecount to simulate a fake score
 
 const game =  {
     level: 1,
@@ -35,6 +40,8 @@ const game =  {
     score: 0,
 }
 const buttons = ["green", "red", "yellow", "blue"];
+
+//Setting selflight colors
 const buttonsProperties = {
     green: {
         colorPressed: "#02ffd1",
@@ -104,7 +111,21 @@ const buttonsProperties = {
     },
 };
 
+const difficulty = {
+    easy: "easy",
+    normal: "normal",
+    hard: "hard",
+};
 
+//Game settings
+const game =  {
+    level: 1,
+    state: state.start,
+    isStarted: false,
+    difficulty: difficulty,
+};
+
+//Getting 1 random color to add...
 function randomButtonColor(){
     const color =  buttons[Math.floor(Math.random() * 4)];
     const buttonColor =  buttonsProperties[color];
@@ -112,6 +133,11 @@ function randomButtonColor(){
 }
 
 function computerPressRndColor(rndBtnColor){
+
+//Basic function to make de pc highligh a rndon color
+function computerPressRndColor(){
+    const rndBtnColor = randomButtonColor();
+
     const { htmlElemt } = rndBtnColor; 
     const lastClassName = htmlElemt.className;
     htmlElemt.className =  `${htmlElemt.className}-active`;
@@ -119,7 +145,22 @@ function computerPressRndColor(rndBtnColor){
         htmlElemt.className = lastClassName;
     }, 1000);
     console.log(htmlElemt);
-}
+};
+
+//Bsc fnc to take a count and display it in th count screen
+function getCount(currentcount){
+    document.querySelector("#count").textContent = currentcount;
+};
+
+//Bsc fnc to take nmbr of lives and display it in LIVES
+function getLives(currentLives){
+    document.querySelector("#lives").textContent = currentLives;
+};
+
+//Bsc fnc to take an argument and display it in historie
+function getHistory(currenthistory){
+    document.querySelector(".historie").textContent = currenthistory;
+};
 
 function isUSerInputCorretUntilNow () {
     console.log("user Pressed: ", game.userPressed);
@@ -132,9 +173,9 @@ function resetInputs(array = []) {
 function callBackSound(audioObj) {
     audioObj.load();
     audioObj.play();
-}
+};
 
-
+//Initializing our colors to highligh
 buttonsProperties.green.init();
 buttonsProperties.red.init();
 buttonsProperties.yellow.init();
@@ -148,9 +189,59 @@ buttonStart.addEventListener("click", function()
     game.level = 1;
 });
 
+//-----Setting events-----
+
+const buttonGreen = document.querySelector("#b-green");
+buttonGreen.addEventListener("click", function () { callBackSound(audioGreen);  });
+const buttonRed = document.querySelector("#b-red");
+buttonRed.addEventListener("click", function () { callBackSound(audioRed);  });
+const buttonYellow = document.querySelector("#b-yellow");
+buttonYellow.addEventListener("click", function(){ callBackSound(audioYellow);  });
+const buttonBlue = document.querySelector("#b-blue");
+buttonBlue.addEventListener("click", function(){ callBackSound(audioBlue);  });
+
+
+const buttonStart = document.querySelector("#circle");
+buttonStart.addEventListener("click", function(){ 
+    callBackSound(audioStart);
+    if (game.state) {
+        game.state = false;
+    } else {
+        game.state = true;
+    };
+});
+const menuStart = document.querySelector("#start");
+menuStart.addEventListener("click", function(){ 
+    callBackSound(audioStart);
+    if (game.state) {
+        game.state = false;
+    } else {
+        game.state = true;
+    };
+});
+
+const easy = document.querySelector("#easy");
+easy.addEventListener("click", function(){
+    game.difficulty = difficulty.easy;
+    console.log(game.difficulty)
+});
+const normal = document.querySelector("#normal");
+normal.addEventListener("click", function(){
+    game.difficulty = difficulty.normal;
+    console.log(game.difficulty)
+});
+const hard = document.querySelector("#hard");
+hard.addEventListener("click", function(){
+    game.difficulty = difficulty.hard;
+    console.log(game.difficulty)
+});
+
+//--End of setting events--
+
 let count = 0;
 
 function main () {
+
     //Async Programming like a for infinity loop without blocking my page.
     setInterval( async function () {
         // computerPressRndColor(randomButtonColor());
@@ -205,6 +296,20 @@ function main () {
         console.log("computer: ", game.computerPressed);
         console.log("--------------------------------");
     }, 2000 );
+
+    setTimeout( function () {
+        console.log("Async Programming");
+    }, 5000);
+
+    //Async Programming like a for infinity loop without blocking my page.
+    setInterval( function () {
+        if (game.state) {
+            computerPressRndColor(randomButtonColor());
+        }
+
+        // console.log(randomButtonColor());
+    }, 1000 );
+
 };
 
 main();
