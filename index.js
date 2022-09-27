@@ -69,19 +69,24 @@ function removeDimm(btncolor){
 function gameTurn() {
 
     if (PCturn) {
-        for (let i = 0; 1 < remain; i++) {
+        console.log("init: gameTurn")
+        for (let i = 0; i < remain; i++) {
             switch (gameArray[remain])  {
                 case 1:
                     blink(firstGrn);
+                    console.log("selected: button green")
                     break;
                 case 2:
                     blink(secondRed);
+                    console.log("selected: button green")
                     break;
                 case  3:
                     blink(thirdBlu);
+                    console.log("selected: button blue")
                     break;
                 case 4:
                     blink(fourthYlw);
+                    console.log("selected: button yellow")
                     break;
                 default:
                     console.log("Number in arr not valid");
@@ -347,7 +352,9 @@ fourthYlw.addEventListener('mouseleave', function()
 const circle = document.querySelector('#circle');
 
 circle.addEventListener('click', function()
-{
+{   
+    play();
+
     level=0;
     lightOn(circle);
 
@@ -375,6 +382,7 @@ circle.addEventListener('mouseleave', function()
 
 const start = document.querySelector('#start');
 start.addEventListener('click', function(){
+    play();
 
     lightOn(start);
 
