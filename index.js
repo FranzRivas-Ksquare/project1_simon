@@ -9,8 +9,8 @@ let dificult=2;
 let remain=1; //To know remaining answers to pass level
 let gameArray=[];
 let toWin=3; //Level needed to win
-let win=false;
-let intervalId;
+//let win=false;
+//let intervalId;
 
 //dummy variables
 
@@ -67,7 +67,6 @@ function removeDimm(btncolor){
 
 // Game highliths the selected buttons
 function gameTurn() {
-
     if (PCturn) {
         console.log("init: gameTurn")
         for (let i = 0; i < remain; i++) {
@@ -124,13 +123,16 @@ function startgame()
 {
     switch(dificult){
         case 1:{getHistory("STARTED EASY");
-        lives=5
+        lives=5;
+        toWin=5;
     break;}
         case 2:{getHistory("STARTED NORMAL");
-        lives=3
+        lives=3;
+        toWin=10;
     break;}
         case 3:{getHistory("STARTED HARD");
-        lives=1
+        lives=2;
+        toWin=1;
     break;}
         case 4:{getHistory("DARK SOULS MODE");
     break;}  
@@ -168,10 +170,16 @@ function restartgame()
 {
     switch(dificult){
         case 1:{getHistory("reset EASY");
+        lives=4;
+        toWin=5;
     break;}
         case 2:{getHistory("reset NORMAL");
+        lives=2;
+        toWin=10;
     break;}
         case 3:{getHistory("reset HARD");
+        lives=1;
+        toWin=20;
     break;}
         case 4:{getHistory("reset MODE");
     break;}  
@@ -179,7 +187,6 @@ function restartgame()
 
     lvl=1;
     remain=1;
-    lives=1; //Setted 1 live to see a change
     playing=true;
     //gameArray=[1,3,2,1]; //different array in extra mode
     getLives(lives);
