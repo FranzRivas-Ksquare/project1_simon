@@ -69,7 +69,7 @@ function gameTurn() {
     if (PCturn) {
         console.log("init: gameTurn")
         for (let i = 0; i < remain; i++) {
-            switch (gameArray[remain])  {
+            switch (gameArray[i])  {
                 case 1:
                     blink(firstGrn);
                     greenAudio.play();
