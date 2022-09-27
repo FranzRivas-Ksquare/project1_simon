@@ -7,14 +7,21 @@ let lastpressed=0; //To store the pressed button (may be not necesary)
 let correct=0; //To store and compare the correct value
 let dificult=2;
 let remain=1; //To know remaining answers to pass level
-let gameArray=[1,1,1,1,1,1,1];
+let gameArray=[];
 let toWin=3; //Level needed to win
 
 //dummy variables
 
+//-------Audios
+const greenAudio = document.getElementById("greenAudio");
+const redAudio = document.getElementById("redAudio");
+const yellowAudio = document.getElementById("yellowAudio");
+const blueAudio = document.getElementById("blueAudio");
+const startAudio = document.getElementById("startAudio");
+const wrongAudio = document.getElementById("wrongAudio");
+const winnerAudio = document.getElementById("winnerAudio");
 
-//-------------------------------------
-//HERE GOES THE INITIALIZATION FOR SOUNDS
+
 //-----PLEASE BE CAREFUL WHEN ADDING-----
 //---------------FEATURES----------------
 //---------------------------------------
@@ -57,14 +64,25 @@ function removeDimm(btncolor){
 
 
 //----SIMON AUX FUNCTIONS-----
+function play()
+{
+    for (var i = 0; i < 20; i++) {
+        gameArray.push(Math.floor(Math.random() * 4) + 1);
+    };
+
+};
+
 function startgame()
 {
     switch(dificult){
         case 1:{getHistory("STARTED EASY");
+        lives=5
     break;}
         case 2:{getHistory("STARTED NORMAL");
+        lives=3
     break;}
         case 3:{getHistory("STARTED HARD");
+        lives=1
     break;}
         case 4:{getHistory("DARK SOULS MODE");
     break;}  
@@ -124,7 +142,7 @@ function restartgame()
 function lvlpassed(){
     lvl++;
     remain=lvl;
-    getHistory("LEvel passed");
+    getHistory("Level passed");
     getCount(lvl);
 }
 
