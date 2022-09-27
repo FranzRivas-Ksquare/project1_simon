@@ -82,7 +82,6 @@ function gameTurn() {
     if(count == remain) {
         PCturn = false;
         count = 0;
-        console.log(PCturn);
         clearInterval(intervalId);
     } else {
         PCturn = true;
@@ -95,22 +94,18 @@ function gameTurn() {
             case 1:
                 greenAudio.play();
                 blink(firstGrn);
-                console.log("selected: button green")
                 break;
             case 2:
                 redAudio.play();
                 blink(secondRed);
-                console.log("selected: button green")
                 break;
             case  3:
                 blueAudio.play();
                 blink(thirdBlu);
-                console.log("selected: button blue")
                 break;
             case 4:
                 yellowAudio.play();
                 blink(fourthYlw);    
-                console.log("selected: button yellow")
                 break;
             default:
                 console.log("Number in arr not valid");
@@ -119,7 +114,6 @@ function gameTurn() {
         count++        
     }
     
-    console.log(PCturn)
 }
 
 
