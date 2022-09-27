@@ -331,9 +331,9 @@ const fourthYlw = document.querySelector('#fourthYlw');
 
 fourthYlw.addEventListener('click', function()
 {
-    lastpressed=2;
+    lastpressed=4;
     if(playing==false){
-        lightOn(secondRed); //lightOn(Object)
+        lightOn(fourthYlw); //lightOn(Object)
     }
     //game behavior
     if(playing==true && PCturn==false)
