@@ -68,7 +68,8 @@ function removeDimm(btncolor){
 function blink(button)
 {
     lightOn(button)
-    removeDimm(button)
+    setTimeout(removeDimm(button), 
+        1500);
 };
 
 function play()
