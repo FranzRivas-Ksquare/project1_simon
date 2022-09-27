@@ -9,8 +9,7 @@ let dificult=2;
 let remain=1; //To know remaining answers to pass level
 let gameArray=[];
 let toWin=3; //Level needed to win
-//let win=false;
-//let intervalId;
+
 
 //dummy variables
 
@@ -73,23 +72,28 @@ function gameTurn() {
             switch (gameArray[remain])  {
                 case 1:
                     blink(firstGrn);
+                    greenAudio.play();
                     console.log("selected: button green")
                     break;
                 case 2:
                     blink(secondRed);
+                    redAudio.play();
                     console.log("selected: button green")
                     break;
                 case  3:
                     blink(thirdBlu);
+                    blueAudio.play();
                     console.log("selected: button blue")
                     break;
                 case 4:
                     blink(fourthYlw);
+                    yellowAudio.play();
                     console.log("selected: button yellow")
                     break;
                 default:
                     console.log("Number in arr not valid");
             }
+        PCturn = false;
         }
     }
 }
@@ -102,19 +106,15 @@ function blink(button)
 };
 
 // start the game with set values and call gameTurn
-function play()
+function initArr()
 {
-    win = false;
     gameArray = [];
-    intervalId = 0;
-    turn = 1;
-
-    getCount(1);
-
+    
     for (var i = 0; i < 20; i++) {
         gameArray.push(Math.floor(Math.random() * 4) + 1);
     }
     PCturn = true;
+    console.log(gameArray)
 
     gameTurn();
 };
@@ -208,9 +208,11 @@ function chkAnswer(place){
 
             if(remain==0){
                 lvlpassed();
+                gameTurn();
                 if(lvl>toWin)
                 {
                     Wingame();
+                    winnerAudio.play();
                 }
             }
             else{
@@ -223,6 +225,7 @@ function chkAnswer(place){
     else if(gameArray[lvl-remain]!=lastpressed) //Bad answer
     {
         getHistory("WRONG")
+        wrongAudio.play();
         lives--;
         getLives(lives);
         if(lives==0)
@@ -254,6 +257,7 @@ firstGrn.addEventListener('click', function()
     {
             //Checking last pressed
         chkAnswer(firstGrn);
+        greenAudio.play();
         
     }
 });
@@ -283,6 +287,7 @@ secondRed.addEventListener('click', function()
     {
             //Checking last pressed
         chkAnswer(secondRed);
+        redAudio.play();
         
     }
 });
@@ -312,6 +317,7 @@ thirdBlu.addEventListener('click', function()
     {
             //Checking last pressed
         chkAnswer(thirdBlu);
+        blueAudio.play();
         
     }
 });
@@ -340,6 +346,7 @@ fourthYlw.addEventListener('click', function()
     {
             //Checking last pressed
         chkAnswer(secondRed);
+        yellowAudio.play();
         
     }
 });
@@ -360,10 +367,9 @@ const circle = document.querySelector('#circle');
 
 circle.addEventListener('click', function()
 {   
-    play();
-
     level=0;
     lightOn(circle);
+    startAudio.play();
 
     if(playing==false){
         startgame();
@@ -389,9 +395,11 @@ circle.addEventListener('mouseleave', function()
 
 const start = document.querySelector('#start');
 start.addEventListener('click', function(){
-    play();
+    
+    initArr();
 
     lightOn(start);
+    startAudio.play();
 
     if(playing==false){
         startgame();
