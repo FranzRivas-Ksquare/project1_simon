@@ -30,32 +30,32 @@ let fakevalue="js generated";
 
 //--------------Functions-------------
 
-// TODO: Take a count and display it in th count screen
+// Take a count and display it in th count screen
 function getCount(currentcount){
     document.querySelector("#count").textContent = currentcount;
 };
 
-// TODO: Take number of lives and display it in LIVES
+// Take number of lives and display it in LIVES
 function getLives(currentLives){
     document.querySelector("#lives").textContent = currentLives;
 };
 
-// TODO: Take an argument and display it in history
+// Take an argument and display it in history
 function getHistory(currenthistory){
     document.querySelector(".historie").textContent = currenthistory;
 };
 
-//TODO: to turn on the button light taking an argument
+// Turn on the button light taking an argument
 function lightOn(btncolor){
 btncolor.setAttribute('class', 'light');
 };
 
-//TODO: to put the preselected dimmed color in its button
+// Put the preselected dimmed color in its button
 function dimmOver(btncolor){
     btncolor.setAttribute('class', 'mouseover');
     };
 
-//TODO: to remove the preselected dimmed color from its button
+// Remove the preselected dimmed color from its button
 function removeDimm(btncolor){
     btncolor.removeAttribute('class', 'mouseover');
     };
@@ -64,6 +64,13 @@ function removeDimm(btncolor){
 
 
 //----SIMON AUX FUNCTIONS-----
+
+function blink(button)
+{
+    lightOn(button)
+    removeDimm(button)
+};
+
 function play()
 {
     for (var i = 0; i < 20; i++) {
