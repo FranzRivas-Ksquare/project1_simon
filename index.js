@@ -9,6 +9,8 @@ let dificult=2;
 let remain=1; //To know remaining answers to pass level
 let gameArray=[];
 let toWin=3; //Level needed to win
+let win=false;
+let intervalId;
 
 //dummy variables
 
@@ -25,8 +27,6 @@ const winnerAudio = document.getElementById("winnerAudio");
 //-----PLEASE BE CAREFUL WHEN ADDING-----
 //---------------FEATURES----------------
 //---------------------------------------
-
-let fakevalue="js generated";
 
 //--------------Functions-------------
 
@@ -65,19 +65,54 @@ function removeDimm(btncolor){
 
 //----SIMON AUX FUNCTIONS-----
 
+// Game highliths the selected buttons
+function gameTurn() {
+
+    if (PCturn) {
+        for (let i = 0; 1 < remain; i++) {
+            switch (gameArray[remain])  {
+                case 1:
+                    blink(firstGrn);
+                    break;
+                case 2:
+                    blink(secondRed);
+                    break;
+                case  3:
+                    blink(thirdBlu);
+                    break;
+                case 4:
+                    blink(fourthYlw);
+                    break;
+                default:
+                    console.log("Number in arr not valid");
+            }
+        }
+    }
+}
+ // make buttons shine
 function blink(button)
 {
     lightOn(button)
     setTimeout(removeDimm(button), 
-        1500);
+        200);
 };
 
+// start the game with set values and call gameTurn
 function play()
 {
+    win = false;
+    gameArray = [];
+    intervalId = 0;
+    turn = 1;
+
+    getCount(1);
+
     for (var i = 0; i < 20; i++) {
         gameArray.push(Math.floor(Math.random() * 4) + 1);
-    };
+    }
+    PCturn = true;
 
+    gameTurn();
 };
 
 function startgame()
