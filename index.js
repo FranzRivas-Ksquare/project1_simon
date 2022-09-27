@@ -64,10 +64,26 @@ function removeDimm(btncolor){
 
 //----SIMON AUX FUNCTIONS-----
 
+ // make buttons shine
+ function blink(button)
+
+{
+
+    lightOn(button)
+
+    setTimeout(function(){
+
+        removeDimm(button);
+
+    }, 1000);
+
+};
+
 // Game highliths the selected buttons
 function gameTurn() {
-    if (PCturn) {
-        console.log("init: gameTurn")
+    console.log("init: gameTurn")
+    getHistory("PC TURN");
+    PCturn=true;
         for (let i = 0; i < remain; i++) {
             switch (gameArray[i])  {
                 case 1:
@@ -93,30 +109,20 @@ function gameTurn() {
                 default:
                     console.log("Number in arr not valid");
             }
-        PCturn = false;
         }
-    }
+        getHistory("YOUR TURN");
+        PCturn = false;
 }
- // make buttons shine
-function blink(button)
-{
-    lightOn(button)
-    setTimeout(removeDimm(button), 
-        200);
-};
+
 
 // start the game with set values and call gameTurn
 function initArr()
 {
     gameArray = [];
-    
     for (var i = 0; i < 20; i++) {
         gameArray.push(Math.floor(Math.random() * 4) + 1);
     }
-    PCturn = true;
     console.log(gameArray)
-
-    gameTurn();
 };
 
 function startgame()
@@ -139,13 +145,10 @@ function startgame()
     }
     lvl=1;
     remain=1;
-    
-    lives=3;
     playing=true;
     getLives(lives);
     getCount(lvl);
-    /*gameArray=HERE GOES A FUNCTION THAT TAKES A LENGTH and returns a 
-    random array of numbers from (1-4) of N LENGHT (1 argument)*/
+    initArr();
 }
 
 function stopgame()
@@ -184,7 +187,6 @@ function restartgame()
         case 4:{getHistory("reset MODE");
     break;}  
     }
-
     lvl=1;
     remain=1;
     playing=true;
@@ -345,7 +347,7 @@ fourthYlw.addEventListener('click', function()
     if(playing==true && PCturn==false)
     {
             //Checking last pressed
-        chkAnswer(secondRed);
+        chkAnswer(fourthYlw);
         yellowAudio.play();
         
     }
@@ -395,8 +397,6 @@ circle.addEventListener('mouseleave', function()
 
 const start = document.querySelector('#start');
 start.addEventListener('click', function(){
-    
-    initArr();
 
     lightOn(start);
     startAudio.play();
