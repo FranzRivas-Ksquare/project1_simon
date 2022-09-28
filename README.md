@@ -12,17 +12,17 @@ Javascript | Mariana Lopez | mariana.lopez@itksquare.edu.mx
 
 Please use this format for your User Stories assignations
 
-| User Stories     | Jose | Franz | Mariana |
-| ---------------- | :--: | ---: |
-| 1. |  X   |      |      |
-| 2. |      |      |   X  |
-| 3. |      |  X   |      |
-| 4. |      |  X   |      |
-| 5. |  X   |      |      |
-| 6. |      |      |   X  |
-| 7. |  X   |      |      |
-| 8. |      |      |   X  |
-| 9. |      |  X   |      |
+| User Stories |  Jose | Franz | Mariana |
+| ------------ | :--:  | ---:  |         |
+| 1. :-------: |   X   |       |         |
+| 2. :-------: |       |       |    X    |
+| 3. :-------: |       |   X   |         |
+| 4. :-------: |       |   X   |         |
+| 5. :-------: |   X   |       |         |
+| 6. :-------: |       |       |    X    |
+| 7. :-------: |   X   |       |         |
+| 8. :-------: |       |       |    X    |
+| 9. :-------: |       |   X   |         |
 
 # Live demo
 
