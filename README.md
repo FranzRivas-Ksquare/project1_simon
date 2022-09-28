@@ -4,9 +4,11 @@ Welcome! This repo contains helpful information and starter files for your proje
 
 ## Team members
 
-SalesForce | Jose de la Cruz | jose.delacruz@itksquare.edu.mx
-Flutter | Franz Albert Rivas Rios | franz.rivas@itksquare.edu.mx
-Javascript | Mariana Lopez | mariana.lopez@itksquare.edu.mx
+| Career | Name | eMail |
+| --- | --- | --- |
+| SalesForce | Jose de la Cruz | jose.delacruz@itksquare.edu.mx |
+| Flutter | Franz Albert Rivas Rios | franz.rivas@itksquare.edu.mx|
+|Javascript | Mariana Lopez | mariana.lopez@itksquare.edu.mx |
 
 ## Assignation 
 
@@ -14,15 +16,15 @@ Please use this format for your User Stories assignations
 
 | User Stories |  Jose | Franz | Mariana |
 | ------------ | ----- | ----- | ------- |
-| 1. :-------: |   X   |       |         |
-| 2. :-------: |       |       |    X    |
-| 3. :-------: |       |   X   |         |
-| 4. :-------: |       |   X   |         |
-| 5. :-------: |   X   |       |         |
-| 6. :-------: |       |       |    X    |
-| 7. :-------: |   X   |       |         |
-| 8. :-------: |       |       |    X    |
-| 9. :-------: |       |   X   |         |
+| 1.           |   X   |       |         |
+| 2.           |       |       |    X    |
+| 3.           |       |   X   |         |
+| 4.           |       |   X   |         |
+| 5.           |   X   |       |         |
+| 6.           |       |       |    X    |
+| 7.           |   X   |       |         |
+| 8.           |       |       |    X    |
+| 9.           |       |   X   |         |
 
 # Live demo
 
