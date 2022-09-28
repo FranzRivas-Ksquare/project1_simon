@@ -6,7 +6,7 @@ Welcome! This repo contains helpful information and starter files for your proje
 
 | Career | Name | eMail |
 | --- | --- | --- |
-| SalesForce | Jose de la Cruz | jose.delacruz@itksquare.edu.mx |
+| SalesForce | Jose de la Cruz Arias | jose.delacruz@itksquare.edu.mx |
 | Flutter | Franz Albert Rivas Rios | franz.rivas@itksquare.edu.mx|
 |Javascript | Mariana Lopez | mariana.lopez@itksquare.edu.mx |
 
