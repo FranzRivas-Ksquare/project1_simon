@@ -4,22 +4,27 @@ Welcome! This repo contains helpful information and starter files for your proje
 
 ## Team members
 
-Write here the names, career path and email of the members of the team
+SalesForce | Jose de la Cruz | jose.delacruz@itksquare.edu.mx
+Flutter | Franz Albert Rivas Rios | franz.rivas@itksquare.edu.mx
+Javascript | Mariana Lopez | mariana.lopez@itksquare.edu.mx
 
 ## Assignation 
 
 Please use this format for your User Stories assignations
 
-| User Stories     | John Doe | Jane Doe |
+| User Stories     | Jose | Franz | Mariana |
 | ---------------- | :--: | ---: |
-| Add US text here |  X   |      |
-| Add US text here |      |    X |
-| Add US text here |  X   |      |
+| 1. |  X   |      |      |
+| 2. |      |      |   X  |
+| 3. |      |  X   |      |
+| 4. |      |  X   |      |
+| 5. |  X   |      |      |
+| 6. |      |      |   X  |
+| 7. |  X   |      |      |
+| 8. |      |      |   X  |
+| 9. |      |  X   |      |
 
 # Live demo
 
 Please include here a link to your [live demo](https://franzrivas-ksquare.github.io/project1_simon/)
-
-# Requeriments
-You need to use the same version of node that we use in class and no external dependices can be used. This means no frameworks or libraries.
 
